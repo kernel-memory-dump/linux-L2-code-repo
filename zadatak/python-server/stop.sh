@@ -9,3 +9,13 @@ if [ -n "$FLASK_APP_PROCESS" ]; then
 else
     echo "Flask app is not running"
 fi
+
+PID=$(lsof -i :5000 -t)
+
+# Kill the process if it is found
+if [ -n "$PID" ]; then
+  kill -9 $PID
+  echo "Process running on port 5000 has been killed."
+else
+  echo "No process running on port 5000."
+fi
